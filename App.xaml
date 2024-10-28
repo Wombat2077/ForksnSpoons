@@ -1,0 +1,26 @@
+﻿<Application x:Class="ForksnSpoons.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ForksnSpoons"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Style x:Key="fontConfig">
+            <!--#region  FontFamily-->
+            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
+            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
+            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
+            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
+            <!--#endregion-->
+            <!--#region  FontFamily-->
+            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
+            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
+            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
+            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
+            <!--#endregion-->
+        </Style>
+        <Style TargetType="Label" BasedOn="{StaticResource fontConfig}" />
+        <Style TargetType="TextBox" BasedOn="{StaticResource fontConfig}" />
+        <Style TargetType="PasswordBox" BasedOn="{StaticResource fontConfig}" />
+        <Style TargetType="TextBlock" BasedOn="{StaticResource fontConfig}" />
+    </Application.Resources>
+</Application>
