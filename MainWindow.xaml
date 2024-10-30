@@ -5,24 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ForksnSpoons"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
 
-    <Grid Background="#EAE7DC">
+    <Grid x:Name="mainGrid">
+        <Grid Background="#EAE7DC">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="195*"/>
             <ColumnDefinition Width="410*"/>
             <ColumnDefinition Width="187*"/>
         </Grid.ColumnDefinitions>
-        <Border  HorizontalAlignment="Center" VerticalAlignment="Center" Width="354" Grid.Column="1" Margin="31,60,25,60" BorderThickness="5" CornerRadius="10" BorderBrush="#D8C3A5" Padding="10" Height="299">
+        <Border  Opacity="1"
+                HorizontalAlignment="Center" 
+                 VerticalAlignment="Center" Width="340" 
+                 Grid.Column="1" Margin="31,60,25,60" 
+                 BorderThickness="5" 
+                 CornerRadius="10" 
+                 BorderBrush="#D8C3A5" 
+                 Padding="10" 
+                 Height="299">
             <StackPanel>
-                <TextBlock FontSize="24" FontWeight="Black" FontFamily="Montserrat" Foreground="#E85A4F" Margin="0, 0, 0, 30" HorizontalAlignment="Center">Авторизация</TextBlock>
-                <Label Content="Логин" FontSize="18" FontWeight="Black" FontFamily="Montserrat" Foreground="#8e8d8a"/>
-                <TextBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="265" Height="38" Text="lorem ipsum" FontSize="18" Padding="6" Foreground="#E98074" BorderBrush="#E98074" BorderThickness="2"/>
-                <Label Content="Пароль" FontSize="18" FontWeight="Black" FontFamily="Montserrat" Foreground="#8e8d8a"/>
-                <PasswordBox HorizontalAlignment="Left" VerticalAlignment="Center"  Width="264" Height="38" Padding="6" FontSize="18" Foreground="#E98074" BorderBrush="#E98074" BorderThickness="2" Password="lorem ipsum"/>
-                <Button Margin="0, 30, 0, 10" Height="30" HorizontalAlignment="Center" Width="170" Background="#E98074" FontSize="18" FontWeight="Bold" IsDefault="True"
-                        Foreground="White">Войти</Button>
+                <TextBlock 
+                    Margin="0, 0, 0, 30" 
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource Header}"
+                    >
+                    Авторизация
+                </TextBlock>
+                <Label Content="Логин" Style="{StaticResource label}"/>
+                <TextBox
+                    x:Name="tbxLogin"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center" 
+                    Width="265" 
+                    Height="38"/>
+                <Label Content="Пароль" Style="{StaticResource label}"/>
+                <PasswordBox 
+                    x:Name="pbxPassword"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"  
+                    Width="264" 
+                    Height="38"/>
+                <Button 
+                    Margin="0, 30, 0, 10" 
+                    HorizontalAlignment="Center" 
+                    Template="{StaticResource NoMouseOverButtonTemplate}" 
+                    Style="{StaticResource button}" 
+                    IsDefault="True"
+                    Click="btnLoginHandler">
+                    Войти
+                </Button>
             </StackPanel>
         </Border>
+    </Grid>
     </Grid>
 </Window>

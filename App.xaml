@@ -4,23 +4,136 @@
              xmlns:local="clr-namespace:ForksnSpoons"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="fontConfig">
-            <!--#region  FontFamily-->
-            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
-            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
-            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
-            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
-            <!--#endregion-->
-            <!--#region  FontFamily-->
-            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
-            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
-            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
-            <Setter Property="Label.FontFamily" Value="Montserrat"></Setter>
-            <!--#endregion-->
+        <!--#region TextBoxes -->
+        <!--#region templates-->
+        <ControlTemplate x:Key="NoMouseOverTextBoxTemplate" TargetType="TextBox">
+            <Border 
+                 Background="{TemplateBinding Background}"  
+                 BorderBrush="{TemplateBinding BorderBrush}"  
+                 BorderThickness="{TemplateBinding BorderThickness}"
+                 Height="{TemplateBinding Height}"
+                 Width="{TemplateBinding Width}">
+                <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{x:Static SystemColors.ControlLightBrush}" />
+                    <Setter Property="Foreground" Value="{x:Static SystemColors.GrayTextBrush}" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="NoMouseOverPasswordTemplate" TargetType="PasswordBox">
+            <Border 
+         Background="{TemplateBinding Background}"  
+         BorderBrush="{TemplateBinding BorderBrush}"  
+         BorderThickness="{TemplateBinding BorderThickness}"
+         Height="{TemplateBinding Height}"
+         Width="{TemplateBinding Width}">
+                <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{x:Static SystemColors.ControlLightBrush}" />
+                    <Setter Property="Foreground" Value="{x:Static SystemColors.GrayTextBrush}" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <!--#endregion-->
+        <!--#region styles-->
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="Montserrat"/>
+            <Setter Property="BorderBrush" Value="#E98074"/>
+            <Setter Property="Foreground" Value="#E98074"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Template" Value="{DynamicResource NoMouseOverTextBoxTemplate}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#E85A4F" />
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True" >
+                    <Setter Property="BorderBrush" Value="#E85A4F" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
-        <Style TargetType="Label" BasedOn="{StaticResource fontConfig}" />
-        <Style TargetType="TextBox" BasedOn="{StaticResource fontConfig}" />
-        <Style TargetType="PasswordBox" BasedOn="{StaticResource fontConfig}" />
-        <Style TargetType="TextBlock" BasedOn="{StaticResource fontConfig}" />
+        <Style TargetType="PasswordBox">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="Montserrat"/>
+            <Setter Property="BorderBrush" Value="#E98074"/>
+            <Setter Property="Foreground" Value="#E98074"/>
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="Template" Value="{DynamicResource NoMouseOverPasswordTemplate}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="#E85A4F" />
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True" >
+                    <Setter Property="BorderBrush" Value="#E85A4F" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--#endregion-->
+        <!--#endregion-->
+        <!--#region TextBlock & Labels-->
+        <!--#region styles-->
+        <Style TargetType="TextBlock" x:Key="Header">
+            <Setter Property="FontWeight" Value="Black"/>
+            <Setter Property="Foreground" Value="#E85A4F" />
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontFamily" Value="Montserrat"/>
+        </Style>
+        <Style TargetType="Label" x:Key="label">
+            <Setter Property="FontWeight" Value="Black"/>
+            <Setter Property="Foreground" Value="#8e8d8a" />
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="Montserrat"/>
+        </Style>
+        <!--#endregion-->
+        <!--#endregion-->
+        <!--#region Buttons-->
+        <!--#region templates-->
+        <ControlTemplate x:Key="NoMouseOverButtonTemplate" TargetType="Button">
+            <Border 
+                 Background="{TemplateBinding Background}"  
+                 BorderBrush="{TemplateBinding BorderBrush}"  
+                 BorderThickness="{TemplateBinding BorderThickness}"
+                 Height="{TemplateBinding Height}"
+                 Width="{TemplateBinding Width}">
+
+                <ContentPresenter 
+                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                 />
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{x:Static SystemColors.ControlLightBrush}" />
+                    <Setter Property="Foreground" Value="{x:Static SystemColors.GrayTextBrush}" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <!--#endregion-->
+        <!--#region styles-->
+        <Style x:Key="button" TargetType="Button">
+            <Setter Property="Width" Value="170" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Background" Value="#E98074" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="AntiqueWhite" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E85A4F" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--#endregion-->
+        <!--#endregion-->
     </Application.Resources>
 </Application>

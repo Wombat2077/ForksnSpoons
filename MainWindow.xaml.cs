@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+//using ForksnSpoons.Views;
 namespace ForksnSpoons
 {
     /// <summary>
@@ -23,6 +23,33 @@ namespace ForksnSpoons
         public MainWindow()
         {
             InitializeComponent();
+            App.startup();
+        }
+
+        private void btnLoginHandler(object sender, RoutedEventArgs e)
+        {
+            //LoadingOverlay.Visibility = Visibility.Visible;
+            bool IsLogined =  App.login(tbxLogin.Text, pbxPassword.Password);
+            if (IsLogined)
+            {
+                switch ((Roles)App.user.Role) 
+                {
+                    case Roles.Administrator:
+                        MessageBox.Show("administrator");
+                        break;
+                    case Roles.Manager:
+                        MessageBox.Show("manager");
+                        break;
+                    case Roles.Client:
+                        MessageBox.Show("client");
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пользователь не найден"); //TODO toasts here cuz toasts is cool
+            }
+            //LoadingOverlay.Visibility = Visibility.Collapsed;
         }
     }
 }
