@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\wombat1742\tasks\ForksnSpoons\obj\Debug\
+C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\
 ForksnSpoons
 none
 false
 DEBUG;TRACE
-C:\Users\wombat1742\tasks\ForksnSpoons\App.xaml
-2-1189447857
-2-298594409
-22-601884983
-20520917850
-Components\LoadingOverlay.xaml;MainWindow.xaml;
+C:\Users\WSR\source\repos\ForksnSpoons\App.xaml
+31287985918
+2-1040716115
+24-213763590
+20-713894180
+Components\LoadingOverlay.xaml;MainWindow.xaml;Views\ProductsView.xaml;
 
-False
+True
 

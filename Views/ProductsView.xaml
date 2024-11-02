@@ -1,0 +1,40 @@
+﻿<Window x:Class="ForksnSpoons.Views.ProductsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ForksnSpoons.Views"
+        mc:Ignorable="d"
+        Title="ProductsView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="115*"/>
+            <RowDefinition Height="304*"/>
+        </Grid.RowDefinitions>
+        <Button 
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="Transparent"
+            Style="{StaticResource logoutButton}"
+            Template="{StaticResource NoMouseOverButtonTemplate}"    
+            >
+            <Image Source="Resources/logout.png" Width="50" />
+        </Button>
+        <TextBlock x:Name="tbkUsername" Style="{StaticResource Header}" Text="Lorem ipsum" HorizontalAlignment="Right" Width="154" />
+        <DataGrid x:Name="dtgProducts" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Артикул" Width="0.5*"/>
+                <DataGridTextColumn Header="Наименование товара" Width="*"/>
+                <DataGridTextColumn Header="Цена товара" Width="*"/>
+                <DataGridTextColumn Header="Количество на складе" Width="*"/>
+                <DataGridTemplateColumn Width="0.5*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Template="{StaticResource NoMouseOverButtonTemplate}">Подробнее...</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

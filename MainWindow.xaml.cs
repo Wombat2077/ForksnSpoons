@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-//using ForksnSpoons.Views;
+using ForksnSpoons.Views;
 namespace ForksnSpoons
 {
     /// <summary>
@@ -32,18 +32,21 @@ namespace ForksnSpoons
             bool IsLogined =  App.login(tbxLogin.Text, pbxPassword.Password);
             if (IsLogined)
             {
-                switch ((Roles)App.user.Role) 
-                {
-                    case Roles.Administrator:
-                        MessageBox.Show("administrator");
-                        break;
-                    case Roles.Manager:
-                        MessageBox.Show("manager");
-                        break;
-                    case Roles.Client:
-                        MessageBox.Show("client");
-                        break;
-                }
+                //switch (App.user.Role) 
+                //{
+                //    case Roles.Administrator:
+                //        ProductsView productsView = new ProductsView();
+                //        Close();
+                //        break;
+                //    case Roles.Manager:
+                //        MessageBox.Show("manager");
+                //        break;
+                //    case Roles.Client:
+                //        MessageBox.Show("client");
+                //        break;
+                //}
+                ProductsView productsView = new ProductsView();
+                Close();
             }
             else
             {

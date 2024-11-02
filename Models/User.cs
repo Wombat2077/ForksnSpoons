@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 using dbUser = ForksnSpoons.database.User;
 namespace ForksnSpoons.Models
 {
-    public  class User : dbUser
+    public  class mUser : dbUser
     {
-        public new Roles Role
+        public mUser(dbUser user)
         {
-            get
-            {
-                return (Roles)base.Role;
-            }
+            Id = user.Id;
+            Login = user.Login;
+            Password = user.Password;
+            Surname = user.Surname;
+            Name = user.Name;
+            Patronymic = user.Patronymic;
+            Role = (Roles)user.Role;
         }
-
-
+        public new Roles Role;
         public string fullName
         {
             get

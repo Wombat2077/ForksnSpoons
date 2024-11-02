@@ -71,6 +71,16 @@
     <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
     <NavigationProperty Name="OrderList" Relationship="Self.FK_OrderList_Product" FromRole="Product" ToRole="OrderList" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="Id" />
@@ -185,6 +195,7 @@
     <EntitySet Name="Order" EntityType="Self.Order" />
     <EntitySet Name="OrderPoint" EntityType="Self.OrderPoint" />
     <EntitySet Name="Product" EntityType="Self.Product" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="User" EntityType="Self.User" />
     <EntitySet Name="OrderList" EntityType="Self.OrderList" />
     <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
