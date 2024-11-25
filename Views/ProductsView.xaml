@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ForksnSpoons.Views"
         mc:Ignorable="d"
-        Title="ProductsView" Height="450" Width="800">
-    <Grid>
+        Title="ВилкаЛожка" Height="450" Width="800">
+    <Grid Background="#EAE7DC">
         <Grid.RowDefinitions>
             <RowDefinition Height="115*"/>
             <RowDefinition Height="304*"/>
@@ -18,19 +18,19 @@
             Style="{StaticResource logoutButton}"
             Template="{StaticResource NoMouseOverButtonTemplate}"    
             >
-            <Image Source="Resources/logout.png" Width="50" />
+            <Image Source="../Resources/logout.png" Width="50" />
         </Button>
-        <TextBlock x:Name="tbkUsername" Style="{StaticResource Header}" Text="Lorem ipsum" HorizontalAlignment="Right" Width="154" />
-        <DataGrid x:Name="dtgProducts" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
+        <TextBlock x:Name="tbkUsername" Style="{StaticResource Header}" Text="Lorem ipsum" HorizontalAlignment="Left" Width="408" Margin="392,0,0,0" />
+        <DataGrid RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  x:Name="dtgProducts" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Артикул" Width="0.5*"/>
-                <DataGridTextColumn Header="Наименование товара" Width="*"/>
-                <DataGridTextColumn Header="Цена товара" Width="*"/>
-                <DataGridTextColumn Header="Количество на складе" Width="*"/>
-                <DataGridTemplateColumn Width="0.5*">
+                <DataGridTextColumn Header="Артикул" Binding="{Binding Article}" Width="0.5*" HeaderStyle="{StaticResource dtgHeader}"/>
+                <DataGridTextColumn Header="Наименование товара" Binding="{Binding Name}" Width="*" HeaderStyle="{StaticResource dtgHeader}"/>
+                <DataGridTextColumn Header="Цена товара" Binding="{Binding Cost}" Width="*" HeaderStyle="{StaticResource dtgHeader}"/>
+                <DataGridTextColumn Header="Количество на складе" Binding="{Binding Count}" Width="0.5*" HeaderStyle="{StaticResource dtgHeader}"/>
+                <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Template="{StaticResource NoMouseOverButtonTemplate}">Подробнее...</Button>
+                            <Button HorizontalAlignment="Stretch" Template="{StaticResource NoMouseOverButtonTemplate}" Style="{StaticResource dtgButton}">Подробнее...</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

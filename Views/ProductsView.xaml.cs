@@ -22,7 +22,7 @@ namespace ForksnSpoons.Views
         public ProductsView()
         {
             InitializeComponent();
-            tbkUsername.Name = App.user.fullName;
+            tbkUsername.Text = App.user.fullName;
             dtgProducts.ItemsSource = db.Database.context.Product.ToList();
         }
     }

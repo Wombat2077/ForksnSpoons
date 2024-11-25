@@ -138,11 +138,49 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Opacity" Value="0.8"/>
-                    <Setter Property="Background" Value="8e8d8a"/>
+                    <Setter Property="Background" Value="#8e8d8a"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="dtgButton" TargetType="Button" BasedOn="{StaticResource button}">
+            <Setter Property="Width" Value="auto" />
+            <Setter Property="Height" Value="auto" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+        </Style>
         <!--#endregion-->
         <!--#endregion-->
+        <!--#region Datagrid & his elements-->
+       <!--#region styles-->
+        <Style x:Key="CellStyle" TargetType="DataGridCell">
+            <Setter Property="Background" Value="#EAE7DC" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#E85A4F" />
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="DataGridRow" x:Key="RowStyle">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#E85A4F" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="dtgHeader" TargetType="DataGridColumnHeader" >
+            <!--<Setter Property="Height" Value="45" />-->
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+       <!--#endregion-->
+       <!--#endregion-->
     </Application.Resources>
 </Application>

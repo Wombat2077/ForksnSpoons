@@ -23,10 +23,10 @@ namespace ForksnSpoons.Models
         {
             get
             {
-                string name = this.Surname + this.Name;
+                string name = $"{this.Surname} {this.Name}";
                 if(this.Patronymic != null)
                 {
-                    name += this.Patronymic;
+                    name += " " + this.Patronymic;
                 }
                 return name;
             }

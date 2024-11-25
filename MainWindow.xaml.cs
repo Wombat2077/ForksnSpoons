@@ -46,6 +46,7 @@ namespace ForksnSpoons
                 //        break;
                 //}
                 ProductsView productsView = new ProductsView();
+                productsView.Show();
                 Close();
             }
             else
