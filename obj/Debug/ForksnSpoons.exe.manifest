@@ -91,14 +91,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ForksnSpoons.exe" size="761760">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ForksnSpoons.exe" size="832928">
       <assemblyIdentity name="ForksnSpoons" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>3bcZ68l0aQGQ+Tc3QEToQbbqBMdQFEXtVpwsh14znIo=</dsig:DigestValue>
+        <dsig:DigestValue>QTkgzyPzUPXnRrE/9I9BbquHt2FQK3dBoS+kYVN58iQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

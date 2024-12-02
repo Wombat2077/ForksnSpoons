@@ -81,3 +81,5 @@ C:\Users\WSR\source\repos\ForksnSpoons\bin\Debug\ForksnSpoons.exe.manifest
 C:\Users\WSR\source\repos\ForksnSpoons\bin\Debug\ForksnSpoons.application
 C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\ForksnSpoons.exe.manifest
 C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\ForksnSpoons.application
+C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\Views\ProductView.g.cs
+C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\Views\ProductView.baml

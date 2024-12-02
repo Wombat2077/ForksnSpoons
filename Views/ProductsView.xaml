@@ -30,7 +30,7 @@
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button HorizontalAlignment="Stretch" Template="{StaticResource NoMouseOverButtonTemplate}" Style="{StaticResource dtgButton}">Подробнее...</Button>
+                            <Button HorizontalAlignment="Stretch" Click="ToProductWindow" Template="{StaticResource NoMouseOverButtonTemplate}" Style="{StaticResource dtgButton}">Подробнее...</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

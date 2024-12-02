@@ -11,25 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using db = ForksnSpoons.database;
+
 namespace ForksnSpoons.Views
 {
     /// <summary>
-    /// Логика взаимодействия для ProductsView.xaml
+    /// Логика взаимодействия для ProductView.xaml
     /// </summary>
-    public partial class ProductsView : Window
+    public partial class ProductView : Window
     {
-        public ProductsView()
+        public ProductView()
         {
             InitializeComponent();
-            tbkUsername.Text = App.user.fullName;
-            dtgProducts.ItemsSource = db.Database.context.Product.ToList();
-        }
-
-        private void ToProductWindow(object sender, RoutedEventArgs e)
-        {
-            ProductView view = new ProductView();
-            view.Show();
         }
     }
 }
