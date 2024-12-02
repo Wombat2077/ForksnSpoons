@@ -15,16 +15,16 @@
       </applicationRequestMinimum>
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
         <!--
-          Параметры манифеста UAC
-          Если нужно изменить уровень контроля учетных записей Windows, замените 
-          узел requestedExecutionLevel одним из следующих значений.
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the
+          requestedExecutionLevel node with one of the following.
 
         <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
         <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
         <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
 
-        Если нужно использовать виртуализацию файлов и реестра для обратной
-             совместимости, удалите узел requestedExecutionLevel.
+         If you want to utilize File and Registry Virtualization for backward
+         compatibility then delete the requestedExecutionLevel node.
     -->
         <requestedExecutionLevel level="asInvoker" uiAccess="false" />
       </requestedPrivileges>
@@ -91,14 +91,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ForksnSpoons.exe" size="832928">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ForksnSpoons.exe" size="833952">
       <assemblyIdentity name="ForksnSpoons" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QTkgzyPzUPXnRrE/9I9BbquHt2FQK3dBoS+kYVN58iQ=</dsig:DigestValue>
+        <dsig:DigestValue>Bml/9X6hNlKfXSuCdTozZOTRX2+o6vSXxZmQXS4VbVE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -120,13 +120,13 @@
       <dsig:DigestValue>CabSpKm6yYNT6twBZzKHKM3v3aBYMgNzK0uSDYpHoWw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ForksnSpoons.exe.config" size="1326">
+  <file name="ForksnSpoons.exe.config" size="1346">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>IVfTa6gWT4h+BHHm6foRrtUTguIprwmuVjv6FuZN6Ps=</dsig:DigestValue>
+      <dsig:DigestValue>R/8xY9AahIq6z2kpXr2hTOgENkh6dqQWPyG5ibRHpLk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="icon.ico" size="206762">

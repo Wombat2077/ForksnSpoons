@@ -42,7 +42,7 @@
             <Label>
                 Производитель
             </Label>
-            <ComboBox />
+            <ComboBox Template="{StaticResource ComboBoxTemplate}"/>
             <Label>
                 Поставщик
             </Label>
@@ -50,14 +50,14 @@
             <Label>
                 Категория
             </Label>
-            <ComboBox />
+            <ComboBox Template="{StaticResource ComboBoxTemplate}"/>
             <Label>
                Описание 
             </Label>
             <TextBox Style="{StaticResource TextArea}" />
             <StackPanel Orientation="Horizontal">
-                <Button Style="{StaticResource button}" Margin="10"  Width="120" Content="Сохранить"/>
-                <Button Style="{StaticResource button}" Margin="10" Width="120" Content="Выйти"/>
+                <Button Template="{StaticResource NoMouseOverButtonTemplate}" Style="{StaticResource button}" Margin="10"  Width="120" Content="Сохранить"/>
+                <Button Template="{StaticResource NoMouseOverButtonTemplate}" Style="{StaticResource button}" Margin="10" Width="120" Content="Выйти"/>
             </StackPanel>
             </StackPanel>
                
