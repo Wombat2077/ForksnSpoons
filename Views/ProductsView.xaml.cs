@@ -22,14 +22,54 @@ namespace ForksnSpoons.Views
         public ProductsView()
         {
             InitializeComponent();
-            tbkUsername.Text = App.user.fullName;
-            dtgProducts.ItemsSource = db.Database.context.Product.ToList();
+            tbkUsername.Text = App.user?.fullName ?? "Гость";
+            dtgProducts.ItemsSource = db.Database.context.Product.ToList(); //TODO: динамическое обновление
+            if (App.user?.Role != Roles.Manager & App.user?.Role != Roles.Administrator) 
+            {
+                ButtonColumnHeader.HeaderTemplate = null;
+            }
         }
 
         private void ToProductWindow(object sender, RoutedEventArgs e)
         {
+            database.Product product = dtgProducts.SelectedItem as database.Product;
+           
+            if (App.user != null & App.user?.Role != Roles.Client)
+            {
+                ProductView view = new ProductView(product);
+                view.Show();
+            }
+            else
+            {
+                ProductPreview view = new ProductPreview(product);
+                view.Show();
+            }
+        }
+        private void logout(object sender, RoutedEventArgs e)
+        {
+            App.logout(this);
+
+        }
+        private void dtgProducts_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            //what we're doing here, is that we're invoking the "MouseWheel" event of the parent ScrollViewer.
+
+            //first, we make the object with the event arguments (using the values from the current event)
+            var args = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
+
+            //then we need to set the event that we're invoking.
+            //the ScrollViewer control internally does the scrolling on MouseWheelEvent, so that's what we're going to use:
+            args.RoutedEvent = ScrollViewer.MouseWheelEvent;
+
+            //and finally, we raise the event on the parent ScrollViewer.
+            ScrollPage.RaiseEvent(args);
+        }
+
+        private void AddProductHandler(object sender, RoutedEventArgs e)
+        {
             ProductView view = new ProductView();
             view.Show();
+            
         }
     }
 }

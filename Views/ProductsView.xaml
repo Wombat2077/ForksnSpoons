@@ -4,30 +4,52 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ForksnSpoons.Views"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="ВилкаЛожка" Height="450" Width="800">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" x:Name="ScrollPage">
     <Grid Background="#EAE7DC">
         <Grid.RowDefinitions>
             <RowDefinition Height="115*"/>
             <RowDefinition Height="304*"/>
         </Grid.RowDefinitions>
-        <Button 
-            HorizontalAlignment="Left"
+            <Button 
+            HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Background="Transparent"
+            BorderBrush="Transparent"
             Style="{StaticResource logoutButton}"
-            Template="{StaticResource NoMouseOverButtonTemplate}"    
+            Template="{StaticResource NoMouseOverButtonTemplate}"
+            Click="logout"
             >
-            <Image Source="../Resources/logout.png" Width="50" />
-        </Button>
-        <TextBlock x:Name="tbkUsername" Style="{StaticResource Header}" Text="Lorem ipsum" HorizontalAlignment="Left" Width="408" Margin="392,0,0,0" />
-        <DataGrid RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  x:Name="dtgProducts" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
+                <StackPanel Orientation="Horizontal" >
+                    <fa:FontAwesome Icon="ArrowRight" FontSize="50" Width="50" Height="50"/>
+                </StackPanel>
+            </Button>
+        <TextBlock x:Name="tbkUsername" TextAlignment="Left" Style="{StaticResource Header}" Text="Lorem ipsum" HorizontalAlignment="Left" Width="408" Margin="20" />
+        <DataGrid x:Name="dtgProducts" PreviewMouseWheel="dtgProducts_PreviewMouseWheel" BorderBrush="Transparent" VerticalScrollBarVisibility="Disabled" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Артикул" Binding="{Binding Article}" Width="0.5*" HeaderStyle="{StaticResource dtgHeader}"/>
                 <DataGridTextColumn Header="Наименование товара" Binding="{Binding Name}" Width="*" HeaderStyle="{StaticResource dtgHeader}"/>
                 <DataGridTextColumn Header="Цена товара" Binding="{Binding Cost}" Width="*" HeaderStyle="{StaticResource dtgHeader}"/>
-                <DataGridTextColumn Header="Количество на складе" Binding="{Binding Count}" Width="0.5*" HeaderStyle="{StaticResource dtgHeader}"/>
-                <DataGridTemplateColumn Width="*">
+                <DataGridTextColumn  Header="Количество на складе" Binding="{Binding Count}" Width="0.5*" HeaderStyle="{StaticResource dtgHeader}"/>
+                    <DataGridTemplateColumn Width="*" x:Name="ButtonColumnHeader">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="HorizontalContentAlignment" Value="Right" />
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Button HorizontalAlignment="Right" Click="AddProductHandler" Margin="0,0,10,0" FontSize="30" x:Name="AddButton" Template="{StaticResource NoMouseOverButtonTemplate}">
+                                    <fa:FontAwesome Icon="Plus" />
+                                    <Button.Style>
+                                        <Style BasedOn="{StaticResource HyperLink}" TargetType="Button"/>
+                                    </Button.Style>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button HorizontalAlignment="Stretch" Click="ToProductWindow" Template="{StaticResource NoMouseOverButtonTemplate}" Style="{StaticResource dtgButton}">Подробнее...</Button>
@@ -37,4 +59,5 @@
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
+    </ScrollViewer>
 </Window>

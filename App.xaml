@@ -5,7 +5,9 @@
              xmlns:local="clr-namespace:ForksnSpoons"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!--#region TextBoxes -->
+        <ResourceDictionary>
+
+            <!--#region TextBoxes -->
         <!--#region templates-->
         <ControlTemplate x:Key="NoMouseOverTextBoxTemplate" TargetType="TextBox">
             <Border 
@@ -112,6 +114,18 @@
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontFamily" Value="Montserrat"/>
         </Style>
+        <Style TargetType="Button" x:Key="HyperLink">
+            <Setter Property="Foreground"  Value="#E85A4F"/>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#E98074" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <!--#endregion-->
         <!--#endregion-->
         <!--#region Buttons-->
@@ -179,7 +193,7 @@
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
                     <Setter Property="Background" Value="#E85A4F" />
-                    <Setter Property="BorderBrush" Value="Transparent" />
+                    <Setter Property="BorderBrush" Value="Black" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -197,6 +211,7 @@
         <Style x:Key="dtgHeader" TargetType="DataGridColumnHeader" >
             <!--<Setter Property="Height" Value="45" />-->
             <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="White" />
             <Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
@@ -204,18 +219,40 @@
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
+            
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#AAE98074" />
                     <Setter Property="Foreground" Value="WhiteSmoke" />
+                    
                 </Trigger>
                 <Trigger Property="SortDirection" Value="Ascending">
                     <Setter Property="Background" Value="#AAE98074" />
                     <Setter Property="Foreground" Value="WhiteSmoke" />
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" x:Name="HeaderContainer">
+                                    <TextBlock Text="{Binding}" TextWrapping="WrapWithOverflow" MaxWidth="{Binding ActualWidth, ElementName=HeaderContainer}"/>
+                                    <fa:FontAwesome Icon="ArrowDown" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
                 </Trigger>
                 <Trigger Property="SortDirection" Value="Descending">
                     <Setter Property="Background" Value="#AAE98074" />
                     <Setter Property="Foreground" Value="WhiteSmoke" />
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" x:Name="HeaderContainer">
+                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" MaxWidth="{Binding ActualWidth, ElementName=HeaderContainer}"/>
+                                    <fa:FontAwesome Icon="ArrowUp" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
                 </Trigger>
             </Style.Triggers>
             
@@ -228,9 +265,9 @@
             <Border MinHeight="30" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                 <Grid x:Name="CbxContainer">
 
-                    <ToggleButton x:Name="ToggleButton" BorderThickness="0" BorderBrush="Transparent" Content="{TemplateBinding SelectedItem}" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" >
+                    <ToggleButton x:Name="ToggleButton" Foreground="Black" BorderThickness="0" BorderBrush="Transparent" Content="{TemplateBinding SelectedItem}" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" >
                         <ToggleButton.Template>
-                            <ControlTemplate>
+                            <ControlTemplate TargetType="ToggleButton">
                                 <Border 
                                   Background="{TemplateBinding Background}"  
                                   BorderBrush="{TemplateBinding BorderBrush}"  
@@ -238,10 +275,16 @@
                                   Height="{TemplateBinding Height}"
                                   Width="{TemplateBinding Width}">
 
-                                    <ContentPresenter 
-                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                  />
+                                    <ContentPresenter
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                  Focusable="False"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </Border>
 
                                 <ControlTemplate.Triggers>
@@ -271,7 +314,9 @@
                             </ScrollViewer>
                         </Border>
                     </Popup>
-                    <fa:FontAwesome Icon="AngleDown" Panel.ZIndex="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <fa:FontAwesome Icon="AngleDown" Panel.ZIndex="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
+                       
+                    </fa:FontAwesome>
                 </Grid>
             </Border>
         </ControlTemplate>
@@ -288,6 +333,9 @@
         </Style>
         <!--#endregion-->
         <!--#endregion-->
-
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

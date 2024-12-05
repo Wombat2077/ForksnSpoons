@@ -13,6 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ForksnSpoons.Views;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 namespace ForksnSpoons
 {
     /// <summary>
@@ -20,9 +24,24 @@ namespace ForksnSpoons
     /// </summary>
     public partial class MainWindow : Window
     {
+        Notifier notifier;
         public MainWindow()
         {
             InitializeComponent();
+            this.notifier = new Notifier(cfg =>
+            {
+                cfg.PositionProvider = new WindowPositionProvider(
+                    parentWindow: Application.Current.MainWindow,
+                    corner: Corner.TopRight,
+                    offsetX: 10,
+                    offsetY: 10);
+
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                    notificationLifetime: TimeSpan.FromSeconds(3),
+                    maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+                cfg.Dispatcher = Application.Current.Dispatcher;
+            });
             App.startup();
         }
 
@@ -32,28 +51,23 @@ namespace ForksnSpoons
             bool IsLogined =  App.login(tbxLogin.Text, pbxPassword.Password);
             if (IsLogined)
             {
-                //switch (App.user.Role) 
-                //{
-                //    case Roles.Administrator:
-                //        ProductsView productsView = new ProductsView();
-                //        Close();
-                //        break;
-                //    case Roles.Manager:
-                //        MessageBox.Show("manager");
-                //        break;
-                //    case Roles.Client:
-                //        MessageBox.Show("client");
-                //        break;
-                //}
                 ProductsView productsView = new ProductsView();
                 productsView.Show();
+                notifier.Dispose();
                 Close();
             }
             else
             {
-                MessageBox.Show("Пользователь не найден"); //TODO toasts here cuz toasts is cool
+                notifier.ShowError("Неправильное имя пользователя или пароль"); //TODO: toasts here cuz toasts is cool
             }
             //LoadingOverlay.Visibility = Visibility.Collapsed;
+        }
+
+        private void enterNotLoginHadler(object sender, RoutedEventArgs e)
+        {
+            ProductsView productsView = new ProductsView();
+            productsView.Show();
+            Close();
         }
     }
 }

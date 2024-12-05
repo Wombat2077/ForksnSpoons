@@ -91,3 +91,7 @@ C:\Users\wombat1742\tasks\ForksnSpoons\obj\Debug\Views\ProductsView.baml
 C:\Users\wombat1742\tasks\ForksnSpoons\obj\Debug\Views\ProductView.baml
 C:\Users\wombat1742\tasks\ForksnSpoons\obj\Debug\ForksnSpoons.exe.manifest
 C:\Users\wombat1742\tasks\ForksnSpoons\obj\Debug\ForksnSpoons.application
+C:\Users\wombat1742\tasks\ForksnSpoons\obj\Debug\Views\ProductPreview.g.cs
+C:\Users\wombat1742\tasks\ForksnSpoons\obj\Debug\Views\ProductPreview.baml
+C:\Users\wombat1742\tasks\ForksnSpoons\bin\Debug\ToastNotifications.dll
+C:\Users\wombat1742\tasks\ForksnSpoons\bin\Debug\ToastNotifications.Messages.dll

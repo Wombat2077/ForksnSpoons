@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ForksnSpoons.Views"
         mc:Ignorable="d"
-        Title="ProductView" Height="450" Width="800" Background="#EAE7DC">
+        Title="ProductView" x:Name="Window" Height="450" Width="800" Background="#EAE7DC">
     <ScrollViewer>
         
         <Grid>
@@ -18,7 +18,7 @@
             <Border Grid.Column="1" Padding="5" BorderThickness="0" BorderBrush="Transparent" HorizontalAlignment="Center">
                 <StackPanel>
             <Border BorderBrush="#E98074" BorderThickness="2" Margin="20, 20, 20, 0" HorizontalAlignment="Center">
-                <Image Source="../Resources/placeholder.jpeg" Width="200"/>
+                <Image Source="{Binding photoSource}" Width="200"/>
             </Border>
             <Label HorizontalContentAlignment="Center">
                 Фото товара
@@ -26,37 +26,37 @@
             <Label>
                 Артикул
             </Label>
-            <TextBox />
+            <TextBox Text="{Binding product.Article}"/>
             <Label>
                 Название товара
             </Label>
-            <TextBox />
+            <TextBox Text="{Binding product.Name}"/>
             <Label>
                     Цена (₽)
             </Label>
-            <TextBox />
+            <TextBox Text="{Binding product.Cost}"/>
             <Label>
                   Количество 
             </Label>
-            <TextBox />
+            <TextBox  Text="{Binding product.Count}"/>
             <Label>
                 Производитель
             </Label>
-            <ComboBox Template="{StaticResource ComboBoxTemplate}"/>
+            <ComboBox x:Name="cbxManufacturer" Template="{StaticResource ComboBoxTemplate}" />
             <Label>
                 Поставщик
             </Label>
-            <ComboBox Template="{StaticResource ComboBoxTemplate}"/>
+            <ComboBox x:Name="cbxDistributor" Template="{StaticResource ComboBoxTemplate}"/>
             <Label>
                 Категория
             </Label>
-            <ComboBox Template="{StaticResource ComboBoxTemplate}"/>
+            <ComboBox x:Name="cbxCategory" Template="{StaticResource ComboBoxTemplate}"/>
             <Label>
                Описание 
             </Label>
-            <TextBox Style="{StaticResource TextArea}" />
+            <TextBox Style="{StaticResource TextArea}" Text="{Binding product.Description}" />
             <StackPanel Orientation="Horizontal">
-                <Button Template="{StaticResource NoMouseOverButtonTemplate}" Style="{StaticResource button}" Margin="10"  Width="120" Content="Сохранить"/>
+                <Button Template="{StaticResource NoMouseOverButtonTemplate}" Style="{StaticResource button}" Margin="10"  Width="120" Click="SaveHandler"  Content="Сохранить"/>
                 <Button Template="{StaticResource NoMouseOverButtonTemplate}" Style="{StaticResource button}" Margin="10" Width="120" Content="Выйти"/>
             </StackPanel>
             </StackPanel>

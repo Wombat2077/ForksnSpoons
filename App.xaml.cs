@@ -32,6 +32,14 @@ namespace ForksnSpoons
                 return false;
             }
         }
+        public static void logout(Window window)
+        {
+            App.user = null;
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            window.Close();
+            
+        }
         public static void startup()
         {
             Database.context.User.Take(0).FirstOrDefault();

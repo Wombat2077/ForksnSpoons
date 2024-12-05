@@ -90,6 +90,12 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="ToastNotifications, Version=2.5.1.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>packages\ToastNotifications.2.5.1\lib\net40\ToastNotifications.dll</HintPath>
+    </Reference>
+    <Reference Include="ToastNotifications.Messages, Version=2.5.1.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>packages\ToastNotifications.Messages.2.5.1\lib\net40\ToastNotifications.Messages.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -106,8 +112,14 @@
     <Compile Include="database\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\mCategory.cs" />
+    <Compile Include="Models\mDistributor.cs" />
+    <Compile Include="Models\mManufacturer.cs" />
+    <Compile Include="Models\mUser.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Views\ProductPreview.xaml.cs">
+      <DependentUpon>ProductPreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProductsView.xaml.cs">
       <DependentUpon>ProductsView.xaml</DependentUpon>
     </Compile>
@@ -170,6 +182,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ProductPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProductsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,6 +241,16 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\B736H6.jpg" />
+    <Resource Include="Resources\D735T5.jpg" />
+    <Resource Include="Resources\E732R7.jpg" />
+    <Resource Include="Resources\F573T5.jpg" />
+    <Resource Include="Resources\G387Y6.jpg" />
+    <Resource Include="Resources\H384H3.jpg" />
+    <Resource Include="Resources\K437E6.jpg" />
+    <Resource Include="Resources\R836H6.jpg" />
+    <Resource Include="Resources\T793T4.jpg" />
+    <Resource Include="Resources\А112Т4.jpg" />
     <Resource Include="Resources\placeholder.jpeg" />
     <Resource Include="Resources\logout.png" />
     <Resource Include="icon.ico" />

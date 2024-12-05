@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ForksnSpoons"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow" Height="550" Width="800">
 
     <Grid x:Name="mainGrid">
         <Grid Background="#EAE7DC">
@@ -22,7 +22,7 @@
                  CornerRadius="10" 
                  BorderBrush="#D8C3A5" 
                  Padding="10" 
-                 Height="299">
+                 Height="350">
             <StackPanel>
                 <TextBlock 
                     Margin="0, 0, 0, 30" 
@@ -54,6 +54,7 @@
                     Click="btnLoginHandler">
                     Войти
                 </Button>
+                <Button Style="{StaticResource HyperLink}" Template="{StaticResource NoMouseOverButtonTemplate}" Click="enterNotLoginHadler"> Войти без авторизации</Button>
             </StackPanel>
         </Border>
     </Grid>
