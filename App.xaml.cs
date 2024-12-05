@@ -10,6 +10,8 @@ using System.Windows;
 using Database = ForksnSpoons.database.Database;
 using dbUser = ForksnSpoons.database.User;
 using ForksnSpoons.Models;
+using Microsoft.Extensions.Logging;
+
 namespace ForksnSpoons
 {
     /// <summary>
@@ -18,6 +20,13 @@ namespace ForksnSpoons
     public partial class App : Application
     {
         public static mUser user;
+        public static Logger logger;
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            ILoggerFactory factory = new LoggerFactory();
+            Logger logger = new Logger(factory.CreateLogger<App>());
+            base.OnStartup(e);
+        }
         public static bool login(String login, String password)
         {
             dbUser user = (dbUser)Database.context.User.Where(u => u.Login == login & u.Password == password).FirstOrDefault();
@@ -43,7 +52,6 @@ namespace ForksnSpoons
         public static void startup()
         {
             Database.context.User.Take(0).FirstOrDefault();
-            
         }
        
     }

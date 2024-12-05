@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 using db = ForksnSpoons.database;
 namespace ForksnSpoons.Views
 {
@@ -19,9 +20,12 @@ namespace ForksnSpoons.Views
     /// </summary>
     public partial class ProductsView : Window
     {
+        public delegate void Updated(); 
+        public event Updated updated;
         public ProductsView()
         {
             InitializeComponent();
+            updated += Update;
             tbkUsername.Text = App.user?.fullName ?? "Гость";
             dtgProducts.ItemsSource = db.Database.context.Product.ToList(); //TODO: динамическое обновление
             if (App.user?.Role != Roles.Manager & App.user?.Role != Roles.Administrator) 
@@ -36,7 +40,7 @@ namespace ForksnSpoons.Views
            
             if (App.user != null & App.user?.Role != Roles.Client)
             {
-                ProductView view = new ProductView(product);
+                ProductView view = new ProductView(product, this);
                 view.Show();
             }
             else
@@ -64,7 +68,14 @@ namespace ForksnSpoons.Views
             //and finally, we raise the event on the parent ScrollViewer.
             ScrollPage.RaiseEvent(args);
         }
-
+        private void Update(object sender= null, RoutedCommand e = null)
+        {
+            dtgProducts.ItemsSource = db.Database.context.Product.ToList();
+        }
+        private void Update()
+        {
+            Update();
+        }
         private void AddProductHandler(object sender, RoutedEventArgs e)
         {
             ProductView view = new ProductView();

@@ -18,6 +18,8 @@ using ToastNotifications;
 using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
 using ToastNotifications.Position;
+using System.Data.Entity.Migrations;
+
 namespace ForksnSpoons.Views
 {
     /// <summary>
@@ -28,13 +30,15 @@ namespace ForksnSpoons.Views
         public database.Product product { get; set; }
         public string photoSource { get; set; }
         Notifier notifier;
+        ProductsView parent;
         public ProductView() : this(new database.Product()) 
         {
           
         }
-        public ProductView(database.Product product)
+        public ProductView(database.Product product, ProductsView parent=null)
         {
             this.product = product;
+            this.parent = parent;
             this.photoSource = "../Resources/"+(product.PhotoPath ?? "placeholder.jpeg");
             DataContext = this;
             InitializeComponent();
@@ -79,17 +83,19 @@ namespace ForksnSpoons.Views
             product.Manufacturer = db.context.Manufacturer.Find(manufacturer.Id);
             product.Distributor = db.context.Distributor.Find(distributor.Id);
             product.Category = db.context.Category.Find(category.Id);
-            db.context.Product.Add(product);
+            db.context.Product.AddOrUpdate(product);
             try
             {
                 db.context.SaveChanges();
                 notifier.ShowSuccess("Товар успешно сохранен");
+                
             }
             catch (Exception ex) 
             {
                 notifier.ShowError("Что-то пошло не так"); //TODO: логгирование
-                
+                App.logger.Log(ex.StackTrace);
             }
+            parent?.Updated?.Invoke();
 
         }
 
