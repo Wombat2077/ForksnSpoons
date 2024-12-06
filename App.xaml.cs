@@ -23,8 +23,7 @@ namespace ForksnSpoons
         public static Logger logger;
         protected override void OnStartup(StartupEventArgs e)
         {
-            ILoggerFactory factory = new LoggerFactory();
-            Logger logger = new Logger(factory.CreateLogger<App>());
+            
             base.OnStartup(e);
         }
         public static bool login(String login, String password)
@@ -51,6 +50,8 @@ namespace ForksnSpoons
         }
         public static void startup()
         {
+            ILoggerFactory factory = new LoggerFactory();
+            App.logger = new Logger(factory.CreateLogger<App>());
             Database.context.User.Take(0).FirstOrDefault();
         }
        

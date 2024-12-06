@@ -20,12 +20,9 @@ namespace ForksnSpoons.Views
     /// </summary>
     public partial class ProductsView : Window
     {
-        public delegate void Updated(); 
-        public event Updated updated;
         public ProductsView()
         {
             InitializeComponent();
-            updated += Update;
             tbkUsername.Text = App.user?.fullName ?? "Гость";
             dtgProducts.ItemsSource = db.Database.context.Product.ToList(); //TODO: динамическое обновление
             if (App.user?.Role != Roles.Manager & App.user?.Role != Roles.Administrator) 
@@ -72,13 +69,13 @@ namespace ForksnSpoons.Views
         {
             dtgProducts.ItemsSource = db.Database.context.Product.ToList();
         }
-        private void Update()
+        public void Update()
         {
-            Update();
+            Update(null, null);
         }
         private void AddProductHandler(object sender, RoutedEventArgs e)
         {
-            ProductView view = new ProductView();
+            ProductView view = new ProductView(this);
             view.Show();
             
         }

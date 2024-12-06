@@ -19,6 +19,8 @@ using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
 using ToastNotifications.Position;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.Infrastructure;
+using System.Runtime.CompilerServices;
 
 namespace ForksnSpoons.Views
 {
@@ -31,9 +33,11 @@ namespace ForksnSpoons.Views
         public string photoSource { get; set; }
         Notifier notifier;
         ProductsView parent;
-        public ProductView() : this(new database.Product()) 
+        public ProductView(ProductsView parent) : this(new database.Product(), parent) 
         {
-          
+            DeleteHyperLink.Visibility = Visibility.Collapsed;
+            tbxArticle.IsReadOnly = false;
+
         }
         public ProductView(database.Product product, ProductsView parent=null)
         {
@@ -42,6 +46,8 @@ namespace ForksnSpoons.Views
             this.photoSource = "../Resources/"+(product.PhotoPath ?? "placeholder.jpeg");
             DataContext = this;
             InitializeComponent();
+            tbxArticle.IsReadOnly = true;
+
             List<mManufacturer> manufacturers = db.context.Manufacturer
                                                             .ToList()
                                                             .ConvertAll(m => new mManufacturer(m));
@@ -60,7 +66,7 @@ namespace ForksnSpoons.Views
             notifier = new Notifier(cfg =>
             {
                 cfg.PositionProvider = new WindowPositionProvider(
-                    parentWindow: Application.Current.MainWindow,
+                    parentWindow: this,
                     corner: Corner.TopRight,
                     offsetX: 10,
                     offsetY: 10);
@@ -93,11 +99,72 @@ namespace ForksnSpoons.Views
             catch (Exception ex) 
             {
                 notifier.ShowError("Что-то пошло не так"); //TODO: логгирование
-                App.logger.Log(ex.StackTrace);
+                App.logger.Log(ex.StackTrace, Logger.logMethods.Error);
             }
-            parent?.Updated?.Invoke();
+            parent.Update();
 
         }
+        protected override void OnClosed(EventArgs e)
+        {
+            notifier.Dispose();
+            base.OnClosed(e);
+        }
 
+        private void CLoseHandler(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void DeleteHandler(object sender, RoutedEventArgs e)
+        {
+            var dialog = new DeletingProductDialog();
+            
+            if ((bool)dialog.ShowDialog())
+            {
+                if(db.context
+                     .OrderList
+                     .Where(ol => 
+                                ol.ProductArticle == product.Article & 
+                                ol.Order.Status != (int)OrderStatuses.New)
+                     .First() != null)
+                {
+                    db.context.Product.Remove(product);
+                }
+                else
+                {
+                    notifier.ShowError("Сначала необходимо завершить все заказы, связанные с этим товаром");
+                }
+                try
+                {
+                    
+                    notifier = new Notifier(cfg =>
+                    {
+                        cfg.PositionProvider = new WindowPositionProvider(
+                            parentWindow: Application.Current.MainWindow,
+                            corner: Corner.TopRight,
+                            offsetX: 10,
+                            offsetY: 10);
+
+                        cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                            notificationLifetime: TimeSpan.FromSeconds(3),
+                            maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+                        cfg.Dispatcher = Application.Current.Dispatcher;
+                    });
+                    db.context.SaveChanges();
+                    notifier.ShowSuccess("Запись удалена");
+                    Close();
+                }
+                catch (DbUpdateException ex)
+                {
+                    notifier.ShowError(ex.Message);
+                }
+                catch (Exception ex){
+                    App.logger.Log(ex.StackTrace, Logger.logMethods.Error);
+                    notifier.ShowError("Что-то пошло не так");
+                }
+            }
+
+        }
     }
 }

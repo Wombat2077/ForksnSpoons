@@ -7,14 +7,14 @@
     <framework targetVersion="4.8" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="ForksnSpoons.exe.manifest" size="8929">
+    <dependentAssembly dependencyType="install" codebase="ForksnSpoons.exe.manifest" size="18906">
       <assemblyIdentity name="ForksnSpoons.exe" version="1.0.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>OL3xjUItxzZPCJew1AaSn+FwrAtxsVSh6DL6P04WxS0=</dsig:DigestValue>
+        <dsig:DigestValue>INxS5+2mrDdf6SXOQBKNmOo94DCLM24q1OLF6elP1DY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -161,6 +161,9 @@
     <Compile Include="Models\mManufacturer.cs" />
     <Compile Include="Models\mUser.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Views\DeletingProductDialog.xaml.cs">
+      <DependentUpon>DeletingProductDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProductPreview.xaml.cs">
       <DependentUpon>ProductPreview.xaml</DependentUpon>
     </Compile>
@@ -226,6 +229,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\DeletingProductDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProductPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

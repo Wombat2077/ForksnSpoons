@@ -18,5 +18,11 @@ namespace ForksnSpoons
         Fail,
         AccessDenied
     }
+    public enum OrderStatuses
+    {
+        New = 1,
+        Completed = 2,
+        NotOrdered = 3 // aka cart
+    }
 
 }

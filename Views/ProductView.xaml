@@ -26,7 +26,7 @@
             <Label>
                 Артикул
             </Label>
-            <TextBox Text="{Binding product.Article}"/>
+            <TextBox x:Name="tbxArticle" Text="{Binding product.Article}"/>
             <Label>
                 Название товара
             </Label>
@@ -57,8 +57,11 @@
             <TextBox Style="{StaticResource TextArea}" Text="{Binding product.Description}" />
             <StackPanel Orientation="Horizontal">
                 <Button Template="{StaticResource NoMouseOverButtonTemplate}" Style="{StaticResource button}" Margin="10"  Width="120" Click="SaveHandler"  Content="Сохранить"/>
-                <Button Template="{StaticResource NoMouseOverButtonTemplate}" Style="{StaticResource button}" Margin="10" Width="120" Content="Выйти"/>
+                <Button Template="{StaticResource NoMouseOverButtonTemplate}" Style="{StaticResource button}" Margin="10" Width="120" Click="CLoseHandler" Content="Выйти"/>
             </StackPanel>
+                    <Button Click="DeleteHandler" x:Name="DeleteHyperLink" Style="{StaticResource HyperLink}" Template="{StaticResource NoMouseOverButtonTemplate}" Margin="0,0,0, 50">
+                        Удалить объект
+                    </Button>
             </StackPanel>
                
         </Border> 
