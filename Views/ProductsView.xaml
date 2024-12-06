@@ -14,7 +14,7 @@
             <RowDefinition Height="304*"/>
         </Grid.RowDefinitions>
             <Button 
-            HorizontalAlignment="Right"
+            HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Background="Transparent"
             BorderBrush="Transparent"
@@ -23,16 +23,64 @@
             Click="logout"
             >
                 <StackPanel Orientation="Horizontal" >
-                    <fa:FontAwesome Icon="ArrowRight" FontSize="50" Width="50" Height="50"/>
+                    <fa:FontAwesome Icon="ArrowLeft" FontSize="50" Width="50" Height="50"/>
                 </StackPanel>
             </Button>
-        <TextBlock x:Name="tbkUsername" TextAlignment="Left" Style="{StaticResource Header}" Text="Lorem ipsum" HorizontalAlignment="Left" Width="408" Margin="20" />
+        <TextBlock x:Name="tbkUsername" TextAlignment="Right" Style="{StaticResource Header}" Text="Lorem ipsum" HorizontalAlignment="Right" Width="408" Margin="20" />
         <DataGrid x:Name="dtgProducts" PreviewMouseWheel="dtgProducts_PreviewMouseWheel" BorderBrush="Transparent" VerticalScrollBarVisibility="Disabled" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Артикул" Binding="{Binding Article}" Width="0.5*" HeaderStyle="{StaticResource dtgHeader}"/>
-                <DataGridTextColumn Header="Наименование товара" Binding="{Binding Name}" Width="*" HeaderStyle="{StaticResource dtgHeader}"/>
+                    <DataGridTemplateColumn CanUserResize="False" MaxWidth="200">
+                        <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Background="White">
+                                <Image Source="{Binding photoPath}" Height="200" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="*" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center">
+                                    <StackPanel >
+                                        <Label >Название товара: </Label>
+                                        <TextBlock Margin="20 ,0, 0, 0" Text="{Binding Name}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Label>Описание:</Label>
+                                        <TextBlock Text="{Binding Description}" MaxWidth="200" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" Margin="20 ,0, 0, 0" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center">
+                                    <StackPanel >
+                                        <Label>Производитель:</Label>
+                                        <TextBlock Margin="20 ,0, 0, 0" Text="{Binding Manufacturer.Name}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label>Цена:</Label>
+                                        <TextBlock  Text="{Binding Cost, StringFormat={}{0:#,0.00}₽}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock  Text="{Binding InStock}"  Margin="10" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--<DataGridTextColumn Header="Артикул" Binding="{Binding Article}" Width="0.5*" HeaderStyle="{StaticResource dtgHeader}"/>-->
+                <!--<DataGridTextColumn Header="Наименование товара" Binding="{Binding Name}" Width="*" HeaderStyle="{StaticResource dtgHeader}"/>
                 <DataGridTextColumn Header="Цена товара" Binding="{Binding Cost}" Width="*" HeaderStyle="{StaticResource dtgHeader}"/>
-                <DataGridTextColumn  Header="Количество на складе" Binding="{Binding Count}" Width="0.5*" HeaderStyle="{StaticResource dtgHeader}"/>
+                <DataGridTextColumn  Header="Количество на складе" Binding="{Binding Count}" Width="0.5*" HeaderStyle="{StaticResource dtgHeader}"/>-->
                     <DataGridTemplateColumn Width="*" x:Name="ButtonColumnHeader">
                         <DataGridTemplateColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">

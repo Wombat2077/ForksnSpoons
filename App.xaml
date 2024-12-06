@@ -130,28 +130,28 @@
         <!--#endregion-->
         <!--#region Buttons-->
         <!--#region templates-->
-        <ControlTemplate x:Key="NoMouseOverButtonTemplate" TargetType="Button">
-            <Border 
+            <ControlTemplate x:Key="NoMouseOverButtonTemplate" TargetType="Button">
+                <Border 
                  Background="{TemplateBinding Background}"  
                  BorderBrush="{TemplateBinding BorderBrush}"  
                  BorderThickness="{TemplateBinding BorderThickness}"
                  Height="{TemplateBinding Height}"
                  Width="{TemplateBinding Width}">
 
-                <ContentPresenter 
+                    <ContentPresenter 
                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
                  />
-            </Border>
+                </Border>
 
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="{x:Static SystemColors.ControlLightBrush}" />
-                    <Setter Property="Foreground" Value="{x:Static SystemColors.GrayTextBrush}" />
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-        <!--#endregion-->
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="{x:Static SystemColors.ControlLightBrush}" />
+                        <Setter Property="Foreground" Value="{x:Static SystemColors.GrayTextBrush}" />
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <!--#endregion-->
         <!--#region styles-->
         <Style x:Key="button" TargetType="Button">
             <Setter Property="Width" Value="170" />
@@ -185,6 +185,9 @@
         <!--#endregion-->
         <!--#endregion-->
         <!--#region Datagrid & his elements-->
+        <!--#region templates -->
+            
+        <!--#endregion-->
         <!--#region styles-->
         <Style x:Key="CellStyle" TargetType="DataGridCell">
             <Setter Property="Background" Value="Transparent" />

@@ -12,7 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
+using System.Windows.Data;
+using System.ComponentModel;
+using System.Windows.Controls.Primitives;
 using db = ForksnSpoons.database;
+using ForksnSpoons.Models;
 namespace ForksnSpoons.Views
 {
     /// <summary>
@@ -20,11 +24,13 @@ namespace ForksnSpoons.Views
     /// </summary>
     public partial class ProductsView : Window
     {
+        List<ToggleButton> toggleButtons;
         public ProductsView()
         {
             InitializeComponent();
             tbkUsername.Text = App.user?.fullName ?? "Гость";
-            dtgProducts.ItemsSource = db.Database.context.Product.ToList(); //TODO: динамическое обновление
+            dtgProducts.ItemsSource = db.Database.context.Product.ToList().ConvertAll(i => new mProduct(i)); //TODO: динамическое обновление
+
             if (App.user?.Role != Roles.Manager & App.user?.Role != Roles.Administrator) 
             {
                 ButtonColumnHeader.HeaderTemplate = null;
@@ -78,6 +84,82 @@ namespace ForksnSpoons.Views
             ProductView view = new ProductView(this);
             view.Show();
             
+        }
+        private bool? TripleToggle(object sender, RoutedEventArgs e)
+        {
+            ToggleButton button = sender as ToggleButton;
+            switch (button.IsChecked)
+            {
+                case true:
+                    button.IsChecked = false;
+                break;
+                case false:
+                    button.IsChecked = null;
+                break;
+                case null:
+                    button.IsChecked = true;
+                break;
+            }
+            return button.IsChecked;
+        }
+        private void dtgSortName(object sender, RoutedEventArgs e)
+        {
+            ListSortDirection? SortDirection;
+            switch (TripleToggle(sender, e))
+            {
+                case true:
+                    SortDirection = ListSortDirection.Ascending; break;
+                case false:
+                    SortDirection = ListSortDirection.Descending; break;
+                default:
+                    SortDirection = null; break;
+            }
+            dtgSort("Name", SortDirection);
+        }
+
+        private void dtgSortManufacturer(object sender, RoutedEventArgs e)
+        {
+            ListSortDirection? SortDirection;
+            switch (TripleToggle(sender, e))
+            {
+                case true:
+                    SortDirection = ListSortDirection.Ascending; break;
+                case false:
+                    SortDirection = ListSortDirection.Descending; break;
+                default:
+                    SortDirection = null; break;
+            }
+            dtgSort("Manufacturer", SortDirection);
+        }
+       
+        private void dtgSortCost(object sender, RoutedEventArgs e)
+        {
+            ListSortDirection? SortDirection;
+            switch (TripleToggle(sender, e))
+            {
+                case true:
+                    SortDirection = ListSortDirection.Ascending; break;
+                case false:
+                    SortDirection = ListSortDirection.Descending; break;
+                default:
+                    SortDirection = null; break;
+            }
+            dtgSort("Cost", SortDirection);
+        }
+        private void dtgSort(string Column, ListSortDirection? SortDirection)
+        {
+
+            //reseting previous sort
+            ICollectionView view = CollectionViewSource.GetDefaultView(dtgProducts.ItemsSource);
+            if (view != null)
+            {
+                view.SortDescriptions.Clear();
+                foreach (DataGridColumn column in dtgProducts.Columns)
+                {
+                    column.SortDirection = null;
+                }
+            }
+
         }
     }
 }
