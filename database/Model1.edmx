@@ -38,14 +38,13 @@
           <Property Name="GetCode" Type="nchar" MaxLength="10" />
           <Property Name="Status" Type="int" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "ForksnSpoons.dbo.OrderList" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="OrderList">
           <Key>
-            <PropertyRef Name="ProductArticle" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="OrderId" Type="int" />
-          <Property Name="ProductArticle" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ProductArticle" Type="nchar" MaxLength="10" />
           <Property Name="Count" Type="int" />
         </EntityType>
         <EntityType Name="OrderPoint">
@@ -134,8 +133,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderList_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="OrderList" Type="Self.OrderList" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderList" Type="Self.OrderList" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="Article" />
@@ -186,17 +185,11 @@
           <EntitySet Name="Distributor" EntityType="Self.Distributor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderList" EntityType="Self.OrderList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderPoint" EntityType="Self.OrderPoint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderList" EntityType="Self.OrderList" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [OrderList].[OrderId] AS [OrderId], 
-    [OrderList].[ProductArticle] AS [ProductArticle], 
-    [OrderList].[Count] AS [Count]
-    FROM [dbo].[OrderList] AS [OrderList]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Order_OrderPoint" Association="Self.FK_Order_OrderPoint">
             <End Role="OrderPoint" EntitySet="OrderPoint" />
             <End Role="Order" EntitySet="Order" />
@@ -326,13 +319,14 @@
         </EntityType>
         <EntityType Name="OrderList">
           <Key>
-            <PropertyRef Name="ProductArticle" />
+            <PropertyRef Name="Id" />
           </Key>
           <Property Name="OrderId" Type="Int32" />
-          <Property Name="ProductArticle" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ProductArticle" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Count" Type="Int32" />
           <NavigationProperty Name="Order" Relationship="Self.FK_OrderList_Order" FromRole="OrderList" ToRole="Order" />
           <NavigationProperty Name="Product" Relationship="Self.FK_OrderList_Product" FromRole="OrderList" ToRole="Product" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Product_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
@@ -407,8 +401,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderList_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="OrderList" Type="Self.OrderList" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderList" Type="Self.OrderList" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="Article" />
@@ -556,6 +550,7 @@
           <EntitySetMapping Name="OrderList">
             <EntityTypeMapping TypeName="ForksnSpoonsModel.OrderList">
               <MappingFragment StoreEntitySet="OrderList">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="ProductArticle" ColumnName="ProductArticle" />
                 <ScalarProperty Name="Count" ColumnName="Count" />

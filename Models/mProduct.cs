@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using dbProduct = ForksnSpoons.database.Product;
 namespace ForksnSpoons.Models
 {
-    class mProduct : dbProduct
+    public class mProduct : dbProduct
     {
-
+        public dbProduct Product { get; private set; }
         public string InStock
         {
             get
@@ -41,7 +41,7 @@ namespace ForksnSpoons.Models
             this.OrderList = product.OrderList;
             this.PhotoPath = product.PhotoPath;
             this.Unit = product.Unit;
-
+            this.Product = product;
         }
     }
 }

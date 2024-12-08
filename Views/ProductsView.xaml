@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ForksnSpoons.Views"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:comps="clr-namespace:ForksnSpoons.Components"
         mc:Ignorable="d"
         Title="ВилкаЛожка" Height="450" Width="800">
     <ScrollViewer VerticalScrollBarVisibility="Auto" x:Name="ScrollPage">
@@ -26,8 +27,21 @@
                     <fa:FontAwesome Icon="ArrowLeft" FontSize="50" Width="50" Height="50"/>
                 </StackPanel>
             </Button>
-        <TextBlock x:Name="tbkUsername" TextAlignment="Right" Style="{StaticResource Header}" Text="Lorem ipsum" HorizontalAlignment="Right" Width="408" Margin="20" />
-        <DataGrid x:Name="dtgProducts" PreviewMouseWheel="dtgProducts_PreviewMouseWheel" BorderBrush="Transparent" VerticalScrollBarVisibility="Disabled" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
+        
+            <TextBlock  x:Name="tbkUsername" TextAlignment="Right" Style="{StaticResource Header}" Text="Lorem ipsum" HorizontalAlignment="Right" Width="408" Margin="20" />
+            <Grid  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 70, 0, 50" Width="390">
+                <TextBox x:Name="tbxSearchBox" TextChanged="SearchHandler" />
+                <Border Background="White" BorderThickness="5" HorizontalAlignment="Right">
+                    <fa:FontAwesome Icon="Search" FontSize="20" VerticalAlignment="Center" Foreground="#FFE98074"/>
+                </Border>
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 180, 0, 50" MinWidth="390" MinHeight="30">
+                <comps:MultipleToggleButton ButtonContent="Имя товара" x:Name="mtbName" Width="125" Click="SortHandler"/>
+                <comps:MultipleToggleButton ButtonContent="Производитель" x:Name="mtbManufacturer" Click="SortHandler" Width="125" Margin="10, 0"/>
+                <comps:MultipleToggleButton ButtonContent="Цена" x:Name="mtbCost" Width="125" Click="SortHandler"/>
+            </StackPanel>
+
+            <DataGrid ItemsSource="{Binding products}" x:Name="dtgProducts" PreviewMouseWheel="dtgProducts_PreviewMouseWheel" BorderBrush="Transparent" VerticalScrollBarVisibility="Disabled" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
             <DataGrid.Columns>
                     <DataGridTemplateColumn CanUserResize="False" MaxWidth="200">
                         <DataGridTemplateColumn.CellTemplate>

@@ -94,6 +94,7 @@
     <EntitySetMapping Name="OrderList">
       <EntityTypeMapping TypeName="ForksnSpoonsModel.OrderList">
         <MappingFragment StoreEntitySet="OrderList">
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="ProductArticle" ColumnName="ProductArticle" />
           <ScalarProperty Name="Count" ColumnName="Count" />

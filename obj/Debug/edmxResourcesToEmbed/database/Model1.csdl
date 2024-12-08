@@ -96,13 +96,14 @@
   </EntityType>
   <EntityType Name="OrderList">
     <Key>
-      <PropertyRef Name="ProductArticle" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="OrderId" Type="Int32" />
-    <Property Name="ProductArticle" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ProductArticle" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Count" Type="Int32" />
     <NavigationProperty Name="Order" Relationship="Self.FK_OrderList_Order" FromRole="OrderList" ToRole="Order" />
     <NavigationProperty Name="Product" Relationship="Self.FK_OrderList_Product" FromRole="OrderList" ToRole="Product" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_Product_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
@@ -177,8 +178,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_OrderList_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="OrderList" Type="Self.OrderList" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OrderList" Type="Self.OrderList" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
         <PropertyRef Name="Article" />

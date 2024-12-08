@@ -17,6 +17,7 @@ using System.ComponentModel;
 using System.Windows.Controls.Primitives;
 using db = ForksnSpoons.database;
 using ForksnSpoons.Models;
+using System.Runtime.Remoting;
 namespace ForksnSpoons.Views
 {
     /// <summary>
@@ -24,13 +25,30 @@ namespace ForksnSpoons.Views
     /// </summary>
     public partial class ProductsView : Window
     {
-        List<ToggleButton> toggleButtons;
+        public  IEnumerable<mProduct> products { get; set; }
+        private List<mProduct> _products;
         public ProductsView()
         {
-            InitializeComponent();
-            tbkUsername.Text = App.user?.fullName ?? "Гость";
-            dtgProducts.ItemsSource = db.Database.context.Product.ToList().ConvertAll(i => new mProduct(i)); //TODO: динамическое обновление
+            //setting window context
+            List<string> sortStates = new List<string> { "Minus", "ChevronDown", "ChevronUp" };
+         
+            _products = db.Database.context.Product.ToList().ConvertAll(i => new mProduct(i));
+            products = _products;
+            DataContext = this;
 
+            InitializeComponent();
+
+            //setting states to sort button
+            mtbCost.states = sortStates;
+            mtbManufacturer.states = sortStates;
+            mtbName.states = sortStates;
+            //setting sortHandler
+            mtbName.Click += SortHandler;
+            mtbManufacturer.Click += SortHandler;
+            mtbCost.Click += SortHandler;
+
+            //Setting Other values and check rights
+            tbkUsername.Text = App.user?.fullName ?? "Гость";
             if (App.user?.Role != Roles.Manager & App.user?.Role != Roles.Administrator) 
             {
                 ButtonColumnHeader.HeaderTemplate = null;
@@ -39,7 +57,7 @@ namespace ForksnSpoons.Views
 
         private void ToProductWindow(object sender, RoutedEventArgs e)
         {
-            database.Product product = dtgProducts.SelectedItem as database.Product;
+            mProduct product = dtgProducts.SelectedItem as mProduct;
            
             if (App.user != null & App.user?.Role != Roles.Client)
             {
@@ -73,7 +91,8 @@ namespace ForksnSpoons.Views
         }
         private void Update(object sender= null, RoutedCommand e = null)
         {
-            dtgProducts.ItemsSource = db.Database.context.Product.ToList();
+            _products = db.Database.context.Product.ToList().ConvertAll(i => new mProduct(i));
+            SearchHandler(null, null);
         }
         public void Update()
         {
@@ -85,81 +104,47 @@ namespace ForksnSpoons.Views
             view.Show();
             
         }
-        private bool? TripleToggle(object sender, RoutedEventArgs e)
-        {
-            ToggleButton button = sender as ToggleButton;
-            switch (button.IsChecked)
-            {
-                case true:
-                    button.IsChecked = false;
-                break;
-                case false:
-                    button.IsChecked = null;
-                break;
-                case null:
-                    button.IsChecked = true;
-                break;
-            }
-            return button.IsChecked;
-        }
-        private void dtgSortName(object sender, RoutedEventArgs e)
-        {
-            ListSortDirection? SortDirection;
-            switch (TripleToggle(sender, e))
-            {
-                case true:
-                    SortDirection = ListSortDirection.Ascending; break;
-                case false:
-                    SortDirection = ListSortDirection.Descending; break;
-                default:
-                    SortDirection = null; break;
-            }
-            dtgSort("Name", SortDirection);
-        }
 
-        private void dtgSortManufacturer(object sender, RoutedEventArgs e)
+        private void SearchHandler(object sender, TextChangedEventArgs e)
         {
-            ListSortDirection? SortDirection;
-            switch (TripleToggle(sender, e))
-            {
-                case true:
-                    SortDirection = ListSortDirection.Ascending; break;
-                case false:
-                    SortDirection = ListSortDirection.Descending; break;
-                default:
-                    SortDirection = null; break;
-            }
-            dtgSort("Manufacturer", SortDirection);
+           
+           this.products = _products.Where(p => p.Name.ToLower().Contains(tbxSearchBox.Text.ToLower()) | 
+                                                p.Manufacturer.Name.ToLower().Contains(tbxSearchBox.Text.ToLower())).ToList();
+           dtgProducts.ItemsSource = products;
         }
-       
-        private void dtgSortCost(object sender, RoutedEventArgs e)
+        private void SortHandler(object sender, RoutedEventArgs e)
         {
-            ListSortDirection? SortDirection;
-            switch (TripleToggle(sender, e))
+            IOrderedEnumerable<mProduct> ordered;
+            if(mtbName.State == "ChevronDown")
             {
-                case true:
-                    SortDirection = ListSortDirection.Ascending; break;
-                case false:
-                    SortDirection = ListSortDirection.Descending; break;
-                default:
-                    SortDirection = null; break;
+                ordered = products.OrderByDescending(i => i.Name);
             }
-            dtgSort("Cost", SortDirection);
-        }
-        private void dtgSort(string Column, ListSortDirection? SortDirection)
-        {
-
-            //reseting previous sort
-            ICollectionView view = CollectionViewSource.GetDefaultView(dtgProducts.ItemsSource);
-            if (view != null)
+            else if(mtbName.State == "ChevronUp")
             {
-                view.SortDescriptions.Clear();
-                foreach (DataGridColumn column in dtgProducts.Columns)
-                {
-                    column.SortDirection = null;
-                }
+                ordered = products.OrderBy(i => i.Name);
             }
-
+            else
+            {
+                ordered = products.OrderBy(i => 1);
+            }
+            if (mtbManufacturer.State == "ChevronDown")
+            {
+                ordered = ordered.ThenByDescending(i => i.Manufacturer.Name);
+            }
+            else if (mtbManufacturer.State == "ChevronUp")
+            {
+                ordered = ordered.ThenBy(i => i.Manufacturer.Name);
+            }
+            if (mtbCost.State == "ChevronDown")
+            {
+                ordered = ordered.ThenByDescending(i => i.Cost);
+            }
+            else if (mtbCost.State == "ChevronUp")
+            {
+                ordered = ordered.ThenBy(i => i.Cost);
+            }
+            dtgProducts.ItemsSource = ordered.ToList();
+            
         }
     }
 }

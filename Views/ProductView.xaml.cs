@@ -29,17 +29,17 @@ namespace ForksnSpoons.Views
     /// </summary>
     public partial class ProductView : Window
     {
-        public database.Product product { get; set; }
+        public mProduct product { get; set; }
         public string photoSource { get; set; }
         Notifier notifier;
         ProductsView parent;
-        public ProductView(ProductsView parent) : this(new database.Product(), parent) 
+        public ProductView(ProductsView parent) : this(new mProduct(new database.Product()), parent) 
         {
             DeleteHyperLink.Visibility = Visibility.Collapsed;
             tbxArticle.IsReadOnly = false;
 
         }
-        public ProductView(database.Product product, ProductsView parent=null)
+        public ProductView(mProduct product, ProductsView parent=null)
         {
             this.product = product;
             this.parent = parent;
@@ -126,9 +126,13 @@ namespace ForksnSpoons.Views
                      .Where(ol => 
                                 ol.ProductArticle == product.Article & 
                                 ol.Order.Status != (int)OrderStatuses.New)
-                     .First() != null)
+                     .FirstOrDefault() != null)
                 {
-                    db.context.Product.Remove(product);
+
+                    var entry = db.context.Entry(product.Product);
+                    if(entry.State == System.Data.Entity.EntityState.Detached)
+                        db.context.Product.Attach(product.Product);
+                    db.context.Product.Remove(product.Product);
                 }
                 else
                 {
@@ -151,6 +155,7 @@ namespace ForksnSpoons.Views
 
                         cfg.Dispatcher = Application.Current.Dispatcher;
                     });
+                    parent.Update();
                     db.context.SaveChanges();
                     notifier.ShowSuccess("Запись удалена");
                     Close();
