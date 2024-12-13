@@ -193,14 +193,16 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="BorderBrush" Value="#00000000" />
+            
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
                     <Setter Property="Background" Value="#E85A4F" />
-                    <Setter Property="BorderBrush" Value="Black" />
                 </Trigger>
             </Style.Triggers>
         </Style>
         <Style TargetType="DataGridRow" x:Key="RowStyle">
+            
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
                     <Setter Property="Background" Value="#E85A4F" />

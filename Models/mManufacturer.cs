@@ -14,6 +14,11 @@ namespace ForksnSpoons.Models
             this.Name = manufacturer.Name;
             this.Product = manufacturer.Product;
         }
+        public mManufacturer(int id, string name)
+        {
+            Name = name;
+            Id = id;
+        }
         public override string ToString()
         {
             return this.Name;

@@ -21,7 +21,7 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-        <Button x:Name="ToggleControl" Content="{Binding ButtonContent}" HorizontalContentAlignment="Left"  Template="{StaticResource NoMouseOverButtonTemplate}" Margin="5, 0"/>
+        <Button x:Name="ToggleControl"  Content="{Binding ButtonContent}" HorizontalContentAlignment="Left"  Template="{StaticResource NoMouseOverButtonTemplate}" Margin="5, 0"/>
         <fa:FontAwesome Icon="{Binding State}" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="Icon" Margin="10, 0"/>
     </Grid>
 </UserControl>

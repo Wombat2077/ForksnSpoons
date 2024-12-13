@@ -84,6 +84,10 @@ namespace ForksnSpoons.Components
             return (FontAwesomeIcon)Enum.Parse(typeof(FontAwesomeIcon), State);
         }
 
-        
+        public void Reset()
+        {
+            StateIndex = 0;
+            Icon.Icon = getIconFromString();
+        }
     }
 }

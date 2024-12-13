@@ -18,6 +18,7 @@ using System.Windows.Controls.Primitives;
 using db = ForksnSpoons.database;
 using ForksnSpoons.Models;
 using System.Runtime.Remoting;
+using ForksnSpoons.Components;
 namespace ForksnSpoons.Views
 {
     /// <summary>
@@ -47,6 +48,11 @@ namespace ForksnSpoons.Views
             mtbManufacturer.Click += SortHandler;
             mtbCost.Click += SortHandler;
 
+            //setting filtration combobox 
+            var manufacturers = db.Database.context.Manufacturer.ToList().ConvertAll(m => new mManufacturer(m));
+            manufacturers.Insert(0, new mManufacturer(-1, "Все производители"));
+            cbxManudacturer.ItemsSource = manufacturers;
+            cbxManudacturer.SelectedIndex = 0;
             //Setting Other values and check rights
             tbkUsername.Text = App.user?.fullName ?? "Гость";
             if (App.user?.Role != Roles.Manager & App.user?.Role != Roles.Administrator) 
@@ -114,37 +120,40 @@ namespace ForksnSpoons.Views
         }
         private void SortHandler(object sender, RoutedEventArgs e)
         {
-            IOrderedEnumerable<mProduct> ordered;
-            if(mtbName.State == "ChevronDown")
+            var button = sender as Button;
+            List<mProduct> ordered = products.ToList();
+            switch (button.Content)
             {
-                ordered = products.OrderByDescending(i => i.Name);
+                case "Имя товара":
+                    ordered = (mtbName.State == "ChevronUp" ? products.OrderBy(p => p.Name) : products.OrderByDescending(p => p.Name)).ToList();
+                    mtbCost.Reset();
+                    mtbManufacturer.Reset();
+                    break;
+                case "Производитель":
+                    ordered = (mtbManufacturer.State == "ChevronUp" ? products.OrderBy(p => p.Manufacturer.Name) : products.OrderByDescending(p => p.Manufacturer.Name)).ToList();
+                    mtbCost.Reset();
+                    mtbName.Reset();
+                    break;
+                case "Цена":
+                    ordered = (mtbCost.State == "ChevronUp" ? products.OrderBy(p => p.Cost) : products.OrderByDescending(p => p.Cost)).ToList();
+                    mtbName.Reset();
+                    mtbManufacturer.Reset();
+                    break;
             }
-            else if(mtbName.State == "ChevronUp")
-            {
-                ordered = products.OrderBy(i => i.Name);
-            }
-            else
-            {
-                ordered = products.OrderBy(i => 1);
-            }
-            if (mtbManufacturer.State == "ChevronDown")
-            {
-                ordered = ordered.ThenByDescending(i => i.Manufacturer.Name);
-            }
-            else if (mtbManufacturer.State == "ChevronUp")
-            {
-                ordered = ordered.ThenBy(i => i.Manufacturer.Name);
-            }
-            if (mtbCost.State == "ChevronDown")
-            {
-                ordered = ordered.ThenByDescending(i => i.Cost);
-            }
-            else if (mtbCost.State == "ChevronUp")
-            {
-                ordered = ordered.ThenBy(i => i.Cost);
-            }
-            dtgProducts.ItemsSource = ordered.ToList();
+
+            dtgProducts.ItemsSource = ordered;
+            return;
             
+        }
+
+        private void FilterHandler(object sender, SelectionChangedEventArgs e)
+        {
+            var item = cbxManudacturer.SelectedItem as mManufacturer;
+            if(item.Id == -1)
+            {
+                dtgProducts.ItemsSource = products;
+            }
+            dtgProducts.ItemsSource = products.Where(p => p.ManufacturerId == item.Id | item.Id == -1).ToList();
         }
     }
 }

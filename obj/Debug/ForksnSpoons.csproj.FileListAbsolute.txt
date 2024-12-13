@@ -131,8 +131,6 @@ C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\Views\ProductPreview.baml
 C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\ForksnSpoons.csproj.CopyComplete
 C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\Views\Test.g.cs
 C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\Views\Test.baml
-C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\Components\TripleToggleButton.g.cs
-C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\Components\TripleToggleButton.baml
 C:\Users\wombat1742\test\ForksnSpoons\bin\Debug\ForksnSpoons.exe.config
 C:\Users\wombat1742\test\ForksnSpoons\bin\Debug\ForksnSpoons.exe.manifest
 C:\Users\wombat1742\test\ForksnSpoons\bin\Debug\ForksnSpoons.application
@@ -207,3 +205,6 @@ C:\Users\wombat1742\test\ForksnSpoons\obj\Debug\ForksnSpoons.application
 C:\Users\wombat1742\test\ForksnSpoons\obj\Debug\ForksnSp.D35E418B.Up2Date
 C:\Users\wombat1742\test\ForksnSpoons\obj\Debug\ForksnSpoons.exe
 C:\Users\wombat1742\test\ForksnSpoons\obj\Debug\ForksnSpoons.pdb
+C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\Components\MultipleToggleButton.g.cs
+C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\WSR\source\repos\ForksnSpoons\obj\Debug\Components\MultipleToggleButton.baml
